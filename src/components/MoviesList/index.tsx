@@ -25,7 +25,7 @@ const MoviesList = ({ movieSearch = '' }: MoviesListProps) => {
       <Heading as="h1" size="lg" mb="20px">
         Movie list
       </Heading>
-      {!movieSearch && (
+      {!movieSearch && !isMoviesListLoading && (
         <Flex justifyContent="center">
           <Text padding="20px 0" fontSize="18px" fontWeight="500">
             Please search movie
