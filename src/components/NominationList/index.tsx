@@ -1,11 +1,11 @@
-import { Box, Button, Flex, Heading } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useNominationContext } from '../../context/NominationContext';
 import NominationBanner from '../NominationBanner';
 
 interface NominationListProps {}
 
-const NominationList: React.FC<NominationListProps> = ({}) => {
+const NominationList: React.FC<NominationListProps> = () => {
   const { showPopup, setShowPopup, nominations, removeNomination } =
     useNominationContext();
   return (
@@ -20,10 +20,28 @@ const NominationList: React.FC<NominationListProps> = ({}) => {
       <Heading as="h1" size="lg" mb="20px">
         Nominations
       </Heading>
+      {!nominations.length && (
+        <Flex justifyContent="center">
+          <Text padding="20px 0" fontSize="18px" fontWeight="500">
+            Please nominate movie
+          </Text>
+        </Flex>
+      )}
       {nominations.map((movie) => (
-        <Flex key={movie.imdbID} justifyContent="space-between" margin="8px 0">
+        <Flex
+          key={movie.imdbID}
+          alignItems="center"
+          justifyContent="space-between"
+          p="10px"
+          _hover={{
+            bgColor: '#ebebeb',
+            padding: '10px',
+            borderRadius: '4px',
+          }}
+        >
           <Box>{movie.Title}</Box>
           <Button
+            colorScheme="red"
             marginLeft="12px"
             onClick={() => {
               removeNomination && removeNomination(movie.imdbID);

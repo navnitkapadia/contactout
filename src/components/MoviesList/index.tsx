@@ -25,15 +25,26 @@ const MoviesList = ({ movieSearch = '' }: MoviesListProps) => {
       <Heading as="h1" size="lg" mb="20px">
         Movie list
       </Heading>
-      {!movieSearch && <Flex justifyContent="center">Please search movie</Flex>}
+      {!movieSearch && (
+        <Flex justifyContent="center">
+          <Text padding="20px 0" fontSize="18px" fontWeight="500">
+            Please search movie
+          </Text>
+        </Flex>
+      )}
       {movieSearch && <Text fontWeight="500">Results for {movieSearch}</Text>}
       {movieSearch && !isMoviesListLoading && !moviesList.length && (
-        <Flex justifyContent="center">No Movies found</Flex>
+        <Flex justifyContent="center">
+          <Text padding="20px 0" fontSize="18px" fontWeight="500">
+            No Movies found
+          </Text>
+        </Flex>
       )}
       {moviesList?.map((movie: Movie) => {
         return (
           <Flex
             key={movie.imdbID}
+            alignItems="center"
             justifyContent="space-between"
             p="10px"
             _hover={{
@@ -44,6 +55,7 @@ const MoviesList = ({ movieSearch = '' }: MoviesListProps) => {
           >
             <Box> {movie.Title}</Box>
             <Button
+              colorScheme="green"
               marginLeft="12px"
               disabled={!!nominations.find((m) => m.imdbID === movie.imdbID)}
               onClick={() => {
@@ -64,6 +76,8 @@ const MoviesList = ({ movieSearch = '' }: MoviesListProps) => {
           <Spinner size={'lg'} m="8px" />
         ) : moviesList?.length ? (
           <Button
+            mt="24px"
+            colorScheme="blue"
             onClick={() => {
               setSize((prevSize) => prevSize + 1);
             }}
